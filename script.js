@@ -6,13 +6,14 @@ for (let i = 0; i < SQUARES_NUMBER; i++) {
   const square = document.createElement('span')
   square.classList.add('square')
 
-  square.addEventListener('mouseover', () => setColor(square))
-  square.addEventListener('mouseleave', () => removeColor(square))
+  square.addEventListener('mouseover', setColor)
+  square.addEventListener('mouseleave', removeColor)
 
   board.append(square)
 }
 
-function setColor(element) {
+function setColor(event) {
+  const element = event.target
   const color = getRandomColor()
   element.style.backgroundColor = color
   element.style.boxShadow = `0 0 10px ${color}, 0 0 15px ${color}`
@@ -21,7 +22,8 @@ function setColor(element) {
   board.style.transition = '.2s linear'
 }
 
-function removeColor(element) {
+function removeColor(event) {
+  const element = event.target
   element.style.backgroundColor = '#1d1d1d'
   element.style.boxShadow = `0 0 2px #000`
 
@@ -30,6 +32,5 @@ function removeColor(element) {
 }
 
 function getRandomColor() {
-  const index = Math.floor(Math.random() * colors.length)
-  return colors[index]
+  return colors[Math.floor(Math.random() * colors.length)]
 }
